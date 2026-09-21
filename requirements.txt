@@ -1,0 +1,17 @@
+websockets>=10,<14
+aiohttp
+aiofiles
+redis>=4.2
+numpy
+pandas
+matplotlib
+rich
+
+# research/orderbook_direction
+scikit-learn
+xgboost
+joblib
+optuna
+hiplot
+torch
+tqdm

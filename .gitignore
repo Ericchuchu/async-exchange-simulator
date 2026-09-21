@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Secrets
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# simulator output
+trade_data/
+position_data/
+result/
+
+# recorded market data and fitted models
+research/**/data/
+research/**/test_data/
+research/**/preprocessed_data/
+*.joblib
