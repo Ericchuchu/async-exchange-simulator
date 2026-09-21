@@ -2,7 +2,7 @@
 
 A paper-trading exchange written with `asyncio`. It relays the live WOO X staging market-data feed in the exchange's own message format, accepts orders over a WebSocket API, matches them against the live order book and trade stream, charges maker and taker fees, tracks hedge-mode positions and reports P&L in real time. A strategy switches from the exchange to the simulator by pointing its WebSocket URLs at `localhost` and swapping its REST client for `simulator/api_client.py`, which keeps the same method names; on the private stream it must subscribe with `{"method": "subscribe", "params": "executionreport"}`, because the exchange's `{event, topic}` message is not recognised.
 
-Context: built between October 2024 and January 2025 in a five-person team during the Kronos Research Quantitative Trading Program (Automated Trading Team). This repository contains the components I built, the simulator and an order-book study; the team's trading systems, strategies and shared infrastructure are not included. See [Provenance](#provenance). Not affiliated with WOO X.
+Context: built between October 2024 and January 2025 in a five-person team during the Kronos Research Quantitative Trading Program (Automated Trading Team). This repository contains the components I built, the simulator and an order-book study; the team's trading systems, strategies and shared infrastructure are not included. See [Provenance](#provenance). Not affiliated with WOO X. This is my own work from the program; it is not Kronos Research code and has not been reviewed or endorsed by Kronos Research.
 
 ## Architecture
 
@@ -66,7 +66,7 @@ The code is the January 2025 version with these changes:
 1. API credentials are read from environment variables instead of being written in the source.
 2. Files renamed: `match_egine.py` → `matching_engine.py`, `backtest.py` → `pnl_monitor.py`. The modules form a package run with `python -m`, so `server.py` imports `.matching_engine`.
 3. **Bug fix.** Sell orders read the bid list in reversed order. WOO X sends bids best-first, so on the limit path marketable sell orders were compared with the worst of the 100 bids and mostly never filled, and on the IOC/FOK path sells were filled from the worst qualifying bid upward. The reversal was removed at both sites; four of the five tests fail on the original code and pass now (the buy-side test passes either way).
-4. Added: the tests, this README, `requirements.txt`, `.env.example`, `.gitignore`, the license.
+4. Added: the tests, this README, `requirements.txt`, `.env.example`, `.gitignore`, the license. These publication edits (packaging, the bug fix, tests and documentation) were prepared with an AI coding assistant in 2026; the simulator and the study themselves are the January 2025 code.
 5. Left out: the Redis bridge that republished the simulator's streams for the team's trading system (it was adapted from a teammate's data publisher), recorded outputs, and the data recorder of the order-book study (built on the program's WebSocket client template).
 
 ## Known limitations
